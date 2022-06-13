@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for
+from helpers import getProducts
 from cs50 import SQL
 
 app = Flask(__name__)
@@ -6,9 +7,9 @@ app = Flask(__name__)
 # Initialize DB:
 db = SQL('sqlite:///test.db')
 
-
 @app.route('/')
 def index():
+    products = getProducts()
     return render_template('layout.html')
 
 if __name__ == '__main__':
