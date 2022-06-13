@@ -1,16 +1,18 @@
 from flask import Flask, render_template, url_for
-from flask_sqlalchemy import SQLAlchemy
+from cs50 import SQL
 
 app = Flask(__name__)
 
-# Config DB:
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 # Initialize DB:
-db = SQLAlchemy(app)
-# Create DB Model:
-class TestTable(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+db = SQL('sqlite:///test.db')
+
+# Create DB Tables:
+db.execute(
+    "CREATE TABLE testing ( id INTEGER PRIMARY KEY AUTOINCREMENT, price INTEGER)"
+)
+
+teste = db.execute('SELECT * FROM test_table')
+print(teste)
 
 @app.route('/')
 def index():
