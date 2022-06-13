@@ -15,6 +15,11 @@
 <body>
     <main>
         <h1>Hello world</h1>
+        <ul>
+            {% for product in products %}
+                <li> {{ product['title'] }} </li>
+            {% endfor %}
+        </ul>
     </main>
 </body>
 </html>

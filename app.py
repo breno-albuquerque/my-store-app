@@ -10,7 +10,8 @@ db = SQL('sqlite:///test.db')
 @app.route('/')
 def index():
     products = getProducts()
-    return render_template('layout.html')
+    print(products)
+    return render_template('layout.html', products=products)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
