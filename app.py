@@ -6,13 +6,6 @@ app = Flask(__name__)
 # Initialize DB:
 db = SQL('sqlite:///test.db')
 
-# Create DB Tables:
-db.execute(
-    "CREATE TABLE testing ( id INTEGER PRIMARY KEY AUTOINCREMENT, price INTEGER)"
-)
-
-teste = db.execute('SELECT * FROM test_table')
-print(teste)
 
 @app.route('/')
 def index():
