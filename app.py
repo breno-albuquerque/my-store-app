@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from helpers import getProducts
 from cs50 import SQL
 
@@ -12,13 +12,19 @@ def index():
     products = getProducts()
     return render_template('layout.html', products=products)
 
-@app.route('/register', method=["GET", "POST"])
+@app.route('/register', methods=["GET", "POST"])
 def register():
-    return None
+    if request.method == "POST":
+        return None
+    else:
+        return render_template('register.html')
 
-@app.route('/login', method=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    return None
+    if request.method == "POST":
+        return None
+    else:
+        return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
