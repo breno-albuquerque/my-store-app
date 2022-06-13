@@ -1,6 +1,5 @@
 import os
 import requests
-import sys
 
 API_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=monitor'
 products = []
@@ -20,7 +19,3 @@ def getProducts():
     except Exception as e:
         print(e)
         return None
-
-
-
-
