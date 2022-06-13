@@ -12,6 +12,10 @@ def index():
     products = getProducts()
     return render_template('layout.html', products=products)
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
