@@ -41,20 +41,12 @@ def home():
             'INSERT INTO Products_User (product_id, user_id) VALUES (?, ?)', productId, session['user']
         )
 
-        cart = getCart()
-        session['cart'] = cart
-
         return Response(status=200)
     else:
         if "user" in session:
             products = getProducts(session['category'])         
-            cartProducts = []
 
-            for i in session['cart']:
-                product = getProductById(i['product_id'])
-                cartProducts.append(product)
-
-            return render_template('products.html', products=products, cartProducts=cartProducts)
+            return render_template('products.html', products=products)
         else:
             return redirect('/')
     
@@ -108,9 +100,7 @@ def login():
             return print('Senha incorreta')
 
         session['user'] = user[0]['id']
-        cart = getCart()
-        session['cart'] = cart
-
+        
         return redirect('/main')
 
     else:
