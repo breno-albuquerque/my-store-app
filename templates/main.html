@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Products
+{% endblock %}
+
+{% block main %}
+    <ul>
+        {% for product in products %}
+            <li>{{ product['title'] }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
