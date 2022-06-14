@@ -1,11 +1,10 @@
 import os
 import requests
 
-API_URL = 'https://api.mercadolibre.com/sites/MLB/search?q=monitor'
-products = []
-
-def getProducts():
+def getProducts(category):
     try:
+        products = []
+        API_URL = f'https://api.mercadolibre.com/sites/MLB/search?q={category}'
         response = requests.get(API_URL)
         response.raise_for_status()
         data = response.json()
@@ -22,7 +21,6 @@ def getProducts():
     
 def getProductById(id):
     try:
-        print(f'https://api.mercadolibre.com/items?ids={id}')
         response = requests.get(f'https://api.mercadolibre.com/items?ids={id}')
         response.raise_for_status()
         data = response.json()

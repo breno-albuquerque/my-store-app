@@ -15,17 +15,36 @@ app.secret_key = "secret"
 def index():
     return render_template('home.html')
 
+@app.route('/main', methods=["GET", "POST"])
+def main():
+    if request.method == "POST":
+        category = request.form.get('category')
+
+        session['category'] = category
+
+        return redirect('/products')
+    else:    
+        if 'user' in session:
+            return render_template('main.html')
+        return redirect('/login')
+
+
 @app.route('/products', methods=["GET", "POST"])
 def home():
     if request.method == "POST":
 
         productId = request.json['productId']
-
         product = getProductById(productId)[0]['body']
 
-        rows2 = db.execute(
+        rows = db.execute(
             'INSERT INTO Products_User (product_id, user_id) VALUES (?, ?)', productId, session['user']
         )
+
+        products = db.execute(
+            'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']
+        )
+
+        session['cart'] = products
 
         return redirect('/')
 
@@ -34,9 +53,25 @@ def home():
         if "user" in session:
     
             user = session["user"]
-            products = getProducts()
+            products = ''
+
+            if "category" in session:
+                products = getProducts(session['category'])
+            else:
+                products = getProducts('desktop')
+
+            if "cart" in session:
+                
+                cart = session["cart"]
+                cartProducts = []
+
+                for i in cart:
+                    product = getProductById(i['product_id'])
+                    cartProducts.append(product)           
+
+                return render_template('products.html', products=products, cartProducts=cartProducts)
+
             return render_template('products.html', products=products)
-        
         else:
             return redirect('/')
     
@@ -67,7 +102,6 @@ def register():
         return redirect('/')
 
     else:
-        # Need to check if is logged in
         if "user" in session:
             return redirect('/logout')
         
@@ -90,10 +124,18 @@ def login():
         if not check_password_hash(user[0]['password'], password):
             return print('Senha incorreta')
 
-        # Set Session:
+        # Set Session user:
         session['user'] = user[0]['id']
 
-        return redirect('/products')
+        products = db.execute(
+            'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']
+        )
+
+        #Set Session cart:
+        if len(products) != 0:
+            session['cart'] = products
+
+        return redirect('/home')
 
     else:
         if "user" in session:
@@ -104,6 +146,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop("user", None)
+    session.pop("cart", None)
     return redirect('/')
 
 if __name__ == '__main__':
