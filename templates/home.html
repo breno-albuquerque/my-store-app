@@ -4,15 +4,11 @@
     Home
 {% endblock %}
 
-{% block head %}
-    <script src="../static/js/home.js" defer></script>
-{% endblock %}
-
 {% block main %}
 
-<form method="get" id="home-form">
-    <button type="submit" id="register-btn">Register</button>
-    <button type="submit" id="login-btn">Login</button>
-</form>
+<section>
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+</section>
 
 {% endblock %}

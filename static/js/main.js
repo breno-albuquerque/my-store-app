@@ -1,8 +1,6 @@
 const cartPageBtn = document.getElementById('cart-page-btn');
 const mainForm = document.getElementById('main-form');
 
-console.log(mainForm)
-
 function handleCartBtnClick(event) {
     event.preventDefault();
 
