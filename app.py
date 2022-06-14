@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import getProducts
+from helpers import getProducts, getProductById
 from cs50 import SQL
 
 app = Flask(__name__)
@@ -13,29 +13,38 @@ app.secret_key = "secret"
 
 @app.route('/')
 def index():
-    # Need to check if is logged in
     return render_template('home.html')
 
-@app.route('/products')
+@app.route('/products', methods=["GET", "POST"])
 def home():
-    if "user" in session:
+    if request.method == "POST":
 
-        user = session["user"]
-        products = getProducts()
-        return render_template('products.html', products=products)
-    
-    else:
+        productId = request.json['productId']
+
+        product = getProductById(productId)
+
         return redirect('/')
+
+    else:
+
+        if "user" in session:
+    
+            user = session["user"]
+            products = getProducts()
+            return render_template('products.html', products=products)
+        
+        else:
+            return redirect('/')
     
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
 
-        name = request.form.get('username')
+        username = request.form.get('username')
         password = request.form.get('password')
-        verify = requires.form.get('verify')
+        verify = request.form.get('verify')
 
-        if not name or not password or not verify:
+        if not username or not password or not verify:
             return print('Every input must be provided')
         if password != verify:
             return print('The password verification is not valid')
@@ -48,7 +57,7 @@ def register():
         hash = generate_password_hash(password)
         
         db.execute(
-            'INSERT INTO Users (username, password) VALUES (?, ?)', name, hash
+            'INSERT INTO Users (username, password) VALUES (?, ?)', username, hash
             )
 
         return redirect('/')
@@ -68,7 +77,7 @@ def login():
         password = request.form.get('password')
 
         if not username or not password:
-            return prin('Every input must be provided')
+            return print('Every input must be provided')
 
         user = db.execute(
             'SELECT * FROM Users WHERE username = ?', username
