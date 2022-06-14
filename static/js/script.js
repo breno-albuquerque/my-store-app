@@ -2,9 +2,10 @@ const homeForm = document.getElementById('home-form');
 const registerBtn = document.getElementById('register-btn');
 const loginBtn = document.getElementById('login-btn');
 
-registerBtn.addEventListener('click', handleLoginClick)
+registerBtn.addEventListener('click', handleFormSubmit)
+loginBtn.addEventListener('click', handleFormSubmit)
 
-function handleLoginClick(event) {
+function handleFormSubmit(event) {
     event.preventDefault()
 
     if (event.target.innerText === "Register") {
