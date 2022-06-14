@@ -7,16 +7,25 @@ app = Flask(__name__)
 # Initialize DB:
 db = SQL('sqlite:///test.db')
 
+# Session Secret:
+app.secret_key = "secret"
 
 @app.route('/')
 def index():
-    products = getProducts()
-    return render_template('main.html', products=products)
-
-@app.route('/home')
-def home():
+    # Need to check if is logged in
     return render_template('home.html')
 
+@app.route('/products')
+def home():
+    if "user" in session:
+
+        user = session["user"]
+        products = getProducts()
+        return render_template('products.html', products=products)
+    
+    else:
+        return redirect('/')
+    
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -42,6 +51,8 @@ def register():
         return redirect('/')
 
     else:
+        # Need to check if is logged in
+
         return render_template('register.html')
 
 @app.route('/login', methods=["GET", "POST"])
@@ -61,10 +72,21 @@ def login():
         if user[0]['password'] != password:
             return print('Senha incorreta')
 
-        return redirect('/')
+        # Set Session:
+        session['user'] = user[0]['id']
+
+        return redirect('/products')
 
     else:
+        if "user" in session:
+            return redirect('/products')
+        
         return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop("user", None)
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
