@@ -49,6 +49,16 @@ def home():
         else:
             products = getProducts(session['category'])         
             return render_template('products.html', products=products)
+
+@app.route('/cart')
+def cart():
+    cartIds = getCart()
+    cart = []
+    for item in cartIds:
+        product = getProductById(item['product_id'])
+        cart.append(product)
+
+    return render_template('cart.html', cart=cart)
     
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -105,7 +115,7 @@ def login():
 
     else:
         if "user" in session:
-            return redirect('/products')
+            return redirect('/main')
         
         return render_template('login.html')
 

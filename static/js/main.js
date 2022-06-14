@@ -1,9 +1,15 @@
-const mainBtns = Array.from(document.getElementsByClassName('main-btn'))
+const cartPageBtn = document.getElementById('cart-page-btn');
+const mainForm = document.getElementById('main-form');
 
-function handleMainBtnClick(event) {
-    const { value } = event.target;
+console.log(mainForm)
 
-    
+function handleCartBtnClick(event) {
+    console.log('gere')
+    event.preventDefault();
+    mainForm.method = 'GET';
+    mainForm.action = '/cart';
+    console.log(mainForm)
+    mainForm.submit();
 }
 
-mainBtns.forEach(item => item.addEventListener('click', handleMainBtnClick))
+cartPageBtn.addEventListener('click', handleCartBtnClick);

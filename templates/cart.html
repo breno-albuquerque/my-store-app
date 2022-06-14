@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+
+{% block main %}
+
+    <section>
+        <h2 style="font-size: 50px;">Cart</h2>
+
+        {% for item in cart %}
+            <div>
+                <img src="{{ item[0]['body']['thumbnail'] }}" />
+                <h3> {{ item[0]['body']['title'] }}</h3>
+            </div>
+        {% endfor %}
+        
+    </section>
+
+{% endblock %}
