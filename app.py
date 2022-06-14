@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request, redirect, session
+from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import getProducts
 from cs50 import SQL
 
@@ -43,9 +44,11 @@ def register():
 
         if len(rows) != 0:
             return print('This username is not available')
+
+        hash = generate_password_hash(password)
         
         db.execute(
-            'INSERT INTO Users (username, password) VALUES (?, ?)', name, password
+            'INSERT INTO Users (username, password) VALUES (?, ?)', name, hash
             )
 
         return redirect('/')
@@ -71,7 +74,7 @@ def login():
             'SELECT * FROM Users WHERE username = ?', username
         )
 
-        if user[0]['password'] != password:
+        if not check_password_hash(user[0]['password'], password):
             return print('Senha incorreta')
 
         # Set Session:
