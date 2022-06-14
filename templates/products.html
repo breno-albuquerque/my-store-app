@@ -19,10 +19,10 @@
         {% endfor %}
     </section>
     <section>
+        <h2 style="font-size: 50px;">Cart</h2>
         {% if cartProducts %}
             {% for item in cartProducts %}
                 <div>
-                    <h2>Cart</h2>
                     <img src="{{ item[0]['body']['thumbnail'] }}" />
                     <h3> {{ item[0]['body']['title'] }}</h3>
                 </div>

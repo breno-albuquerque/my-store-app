@@ -1,11 +1,11 @@
-from flask import Flask, render_template, url_for, request, redirect, session
+from flask import Flask, render_template, url_for, request, redirect, session, Response
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import getProducts, getProductById
+from helpers import getProducts, getProductById, getCart
 from cs50 import SQL
 
 app = Flask(__name__)
 
-# Initialize DB:
+# Connect DB:
 db = SQL('sqlite:///test.db')
 
 # Session Secret:
@@ -26,6 +26,7 @@ def main():
     else:    
         if 'user' in session:
             return render_template('main.html')
+
         return redirect('/login')
 
 
@@ -40,38 +41,20 @@ def home():
             'INSERT INTO Products_User (product_id, user_id) VALUES (?, ?)', productId, session['user']
         )
 
-        products = db.execute(
-            'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']
-        )
+        cart = getCart()
+        session['cart'] = cart
 
-        session['cart'] = products
-
-        return redirect('/')
-
+        return Response(status=200)
     else:
-
         if "user" in session:
-    
-            user = session["user"]
-            products = ''
+            products = getProducts(session['category'])         
+            cartProducts = []
 
-            if "category" in session:
-                products = getProducts(session['category'])
-            else:
-                products = getProducts('desktop')
+            for i in session['cart']:
+                product = getProductById(i['product_id'])
+                cartProducts.append(product)
 
-            if "cart" in session:
-                
-                cart = session["cart"]
-                cartProducts = []
-
-                for i in cart:
-                    product = getProductById(i['product_id'])
-                    cartProducts.append(product)           
-
-                return render_template('products.html', products=products, cartProducts=cartProducts)
-
-            return render_template('products.html', products=products)
+            return render_template('products.html', products=products, cartProducts=cartProducts)
         else:
             return redirect('/')
     
@@ -124,18 +107,11 @@ def login():
         if not check_password_hash(user[0]['password'], password):
             return print('Senha incorreta')
 
-        # Set Session user:
         session['user'] = user[0]['id']
+        cart = getCart()
+        session['cart'] = cart
 
-        products = db.execute(
-            'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']
-        )
-
-        #Set Session cart:
-        if len(products) != 0:
-            session['cart'] = products
-
-        return redirect('/home')
+        return redirect('/main')
 
     else:
         if "user" in session:
@@ -145,8 +121,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop("user", None)
-    session.pop("cart", None)
+    session.clear()
     return redirect('/')
 
 if __name__ == '__main__':

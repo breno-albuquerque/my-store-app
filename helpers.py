@@ -1,6 +1,11 @@
 import os
 import requests
 
+from flask import session
+from cs50 import SQL
+
+db = SQL('sqlite:///test.db')
+
 def getProducts(category):
     try:
         products = []
@@ -30,3 +35,8 @@ def getProductById(id):
     except Exception as e:
         print(e)
         return None
+
+def getCart():
+    return db.execute(
+        'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']
+    )
