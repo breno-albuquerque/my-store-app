@@ -29,7 +29,6 @@ def main():
 
         return redirect('/login')
 
-
 @app.route('/products', methods=["GET", "POST"])
 def home():
     if request.method == "POST":
@@ -43,12 +42,13 @@ def home():
 
         return Response(status=200)
     else:
-        if "user" in session:
-            products = getProducts(session['category'])         
-
-            return render_template('products.html', products=products)
-        else:
+        if "user" not in session:
             return redirect('/')
+        if "category" not in session:
+            return redirect('/main')
+        else:
+            products = getProducts(session['category'])         
+            return render_template('products.html', products=products)
     
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -100,7 +100,7 @@ def login():
             return print('Senha incorreta')
 
         session['user'] = user[0]['id']
-        
+
         return redirect('/main')
 
     else:

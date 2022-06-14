@@ -7,18 +7,18 @@ from cs50 import SQL
 db = SQL('sqlite:///test.db')
 
 def getProducts(category):
+    products = []
+
     try:
-        products = []
-        API_URL = f'https://api.mercadolibre.com/sites/MLB/search?q={category}'
-        response = requests.get(API_URL)
+        response = requests.get(f'https://api.mercadolibre.com/sites/MLB/search?q={category}')
         response.raise_for_status()
         data = response.json()
         
         for i in range(len(data['results'])):
-            if i <= 50:
+            if i <= 20:
                 products.append(data['results'][i])
 
-        return products        
+        return products
 
     except Exception as e:
         print(e)
