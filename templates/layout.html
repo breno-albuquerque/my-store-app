@@ -10,6 +10,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/style.css" rel="stylesheet">
+
+    <script src="../static/js/layout.js" defer></script>
     
 
     <title>Store App {% block title %} {% endblock %}</title>
@@ -17,6 +19,17 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    {% if session['user'] %}
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/main">Search</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% endif %}
     <main>
         {% block main %}{% endblock %}
     </main>

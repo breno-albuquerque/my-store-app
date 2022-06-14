@@ -11,7 +11,7 @@ db = SQL('sqlite:///test.db')
 # Session Secret:
 app.secret_key = "secret"
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
     return render_template('home.html')
 
