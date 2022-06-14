@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from helpers import getProducts
 from cs50 import SQL
 
@@ -19,14 +19,35 @@ def home():
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        return None
+
+        name = request.form.get('username')
+        password = request.form.get('password')
+
+        db.execute(
+            'INSERT INTO Users (username, password) VALUES (?, ?)', name, password
+            )
+
+        return redirect('/')
+
     else:
         return render_template('register.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        return None
+        
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = db.execute(
+            'SELECT username, password FROM Users WHERE username = ?', username
+        )
+
+        if user[0]['password'] != password:
+            return print('Senha incorreta')
+
+        return redirect('/')
+
     else:
         return render_template('login.html')
 
