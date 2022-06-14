@@ -22,12 +22,10 @@ def getProducts():
     
 def getProductById(id):
     try:
-        print(id)
         print(f'https://api.mercadolibre.com/items?ids={id}')
         response = requests.get(f'https://api.mercadolibre.com/items?ids={id}')
         response.raise_for_status()
         data = response.json()
-        print (data)
 
         return data
     

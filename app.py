@@ -21,7 +21,11 @@ def home():
 
         productId = request.json['productId']
 
-        product = getProductById(productId)
+        product = getProductById(productId)[0]['body']
+
+        rows2 = db.execute(
+            'INSERT INTO Products_User (product_id, user_id) VALUES (?, ?)', productId, session['user']
+        )
 
         return redirect('/')
 
