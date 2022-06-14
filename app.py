@@ -52,7 +52,9 @@ def register():
 
     else:
         # Need to check if is logged in
-
+        if "user" in session:
+            return redirect('/logout')
+        
         return render_template('register.html')
 
 @app.route('/login', methods=["GET", "POST"])
