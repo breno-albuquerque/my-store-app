@@ -39,7 +39,6 @@ def getProductById(id):
 def Error(code, message):
     return render_template('error.html', code=code, message=message)
 
-
 def getCart():
     return db.execute(
         'SELECT product_id FROM Products_User WHERE user_id = ?', session['user']

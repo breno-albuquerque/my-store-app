@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/register" method="post">
-        <div>
-            <input autocomplete="off" id="username" name="username" placeholder="Username" type="text">
+    <form class="d-flex flex-column container mt-lg-5" action="/register" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" id="username" name="username" placeholder="Username" type="text">
         </div>
-        <div>
-            <input autocomplete="off" id="password" name="password" placeholder="Password" type="text">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" id="password" name="password" placeholder="Password" type="text">
         </div>
-        <div>
-            <input autocomplete="off" id="verify" name="verify" placeholder="Verify" type="text">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" id="verify" name="verify" placeholder="Verify" type="text">
         </div>
 
-        <button type="submit">Register</button>
+        <button class="btn btn-primary mx-auto w-auto" type="submit">Register</button>
     </form>
 {% endblock %}

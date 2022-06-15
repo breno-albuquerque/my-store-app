@@ -8,6 +8,13 @@
     <script src="../static/js/home.js" defer></script>
 {% endblock %}
 
+{% block header %}
+    <nav class="d-flex align-items-center">
+        <a class="btn btn-outline-light me-2" href="/register">Register</a>
+        <a class="btn btn-warning" href="/login">Login</a>
+    </nav>
+{% endblock %}
+
 {% block main %}
 
 {% with messages = get_flashed_messages() %}
@@ -19,10 +26,5 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
-
-<section>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
-</section>
 
 {% endblock %}
