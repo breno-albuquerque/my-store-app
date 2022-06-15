@@ -13,7 +13,7 @@ app.secret_key = "secret"
 
 @app.route('/', methods=["GET"])
 def index():
-    if 'user in session':
+    if 'user' in session:
         return redirect('/main')
 
     return render_template('home.html')
