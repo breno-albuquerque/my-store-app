@@ -50,7 +50,7 @@ def home():
             products = getProducts(session['category'])         
             return render_template('products.html', products=products)
 
-@app.route('/cart')
+@app.route('/cart', methods=["GET", "DELETE"])
 def cart():
     cartIds = getCart()
     cart = []
@@ -59,6 +59,16 @@ def cart():
         cart.append(product)
 
     return render_template('cart.html', cart=cart)
+
+@app.route('/deleteCart', methods=["DELETE"])
+def deleteCart():
+    productId = request.args['id']
+
+    db.execute(
+        'DELETE FROM Products_User WHERE user_id = ? AND product_id = ?', session['user'], productId
+    )
+
+    return redirect('/cart')
     
 @app.route('/register', methods=["GET", "POST"])
 def register():

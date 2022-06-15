@@ -4,16 +4,20 @@
     Cart
 {% endblock %}
 
+{% block head %}
+    <script src="../static/js/cart.js" defer></script>
+{% endblock %}
 
 {% block main %}
 
-    <section>
+    <section id="cart-section">
         <h2 style="font-size: 50px;">Cart</h2>
 
         {% for item in cart %}
-            <div>
+            <div id="{{ item[0]['body']['id'] }}">
                 <img src="{{ item[0]['body']['thumbnail'] }}" />
                 <h3> {{ item[0]['body']['title'] }}</h3>
+                <button class="remove-btn">Remove</button>
             </div>
         {% endfor %}
         
