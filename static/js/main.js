@@ -1,5 +1,6 @@
 const cartPageBtn = document.getElementById('cart-page-btn');
 const mainForm = document.getElementById('main-form');
+const flashMsg = document.getElementById('flash-main');
 
 function handleCartBtnClick(event) {
     event.preventDefault();
@@ -14,3 +15,11 @@ function handleCartBtnClick(event) {
 }
 
 cartPageBtn.addEventListener('click', handleCartBtnClick);
+
+window.onload = () => {
+    if (!flashMsg) return;
+
+    setTimeout(() => {
+        flashMsg.style.display = 'none';
+    }, 1500);
+}

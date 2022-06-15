@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, session, Response
+from flask import Flask, render_template, url_for, request, redirect, session, Response, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import getProducts, getProductById, getCart
 from cs50 import SQL
@@ -68,7 +68,7 @@ def deleteCart():
         'DELETE FROM Products_User WHERE user_id = ? AND product_id = ? LIMIT 1', session['user'], productId
     )
 
-    return redirect('/cart')
+    return Response(status=200)
     
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -121,10 +121,12 @@ def login():
 
         session['user'] = user[0]['id']
 
+        flash('You have been logged in!')
         return redirect('/main')
 
     else:
         if "user" in session:
+            flash('You are already logged in!')
             return redirect('/main')
         
         return render_template('login.html')
@@ -132,6 +134,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
+    flash("You have been logged out!")
     return redirect('/')
 
 if __name__ == '__main__':

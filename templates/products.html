@@ -9,6 +9,11 @@
 {% endblock %}
 
 {% block main %}
+
+    <div id="flash-product" style="display: none; transition: all 0.5s;" class="alert alert-primary alert-dismissible fade show" role="alert">
+        <span> Added to cart! </span>
+    </div>
+
     <section>
         {% for product in products %}
             <div id="{{ product['id'] }}" class="product-card" action="/products" method="post">

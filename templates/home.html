@@ -4,7 +4,21 @@
     Home
 {% endblock %}
 
+{% block head %}
+    <script src="../static/js/home.js" defer></script>
+{% endblock %}
+
 {% block main %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div id="flash-home" class="alert alert-primary alert-dismissible fade show" role="alert">
+                <span> {{ msg }} </span>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 <section>
     <a href="/register">Register</a>
