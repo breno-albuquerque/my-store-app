@@ -6,6 +6,7 @@
 
 {% block head %}
     <script src="../static/js/products.js" defer></script>
+    <link href="/static/css/products.css" rel="stylesheet">
 {% endblock %}
 
 {% block main %}
@@ -14,13 +15,13 @@
         <span> Added to cart! </span>
     </div>
 
-    <section>
+    <section id="product-section">
         {% for product in products %}
-            <div id="{{ product['id'] }}" class="product-card" action="/products" method="post">
-                <img class="product-image" src="{{ product['thumbnail'] }}" />
-                <h3 class="product-title"> {{ product['title'] }}</h3>
-                <p class="product-price"> R$ {{ product['price'] }} </p>
-                <button class="product-btn" id="add-btn" type="button">Add</button>
+            <div id="{{ product['id'] }}" class="shadow-sm p-3 mb-5 bg-white rounded product-card" action="/products" method="post">
+                <img class="product-image" src="{{ product['thumbnail'].replace('I.jpg', 'W-webp') }}" />
+                <h3 class="product-title fs-6"> {{ product['title'] }}</h3>
+                <p class="product-price fs-5"> R$ {{ product['price'] }} </p>
+                <button class="product-btn btn-dark" id="add-btn" type="button">Add</button>
             </div>
         {% endfor %}
     </section>
