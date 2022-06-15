@@ -1,3 +1,40 @@
 .yellow {
     color: #FFCA2C;
 }
+
+.bg-lighter {
+    background-color: #2D3339;
+}
+
+.bg-selected {
+    background-color: #48525B;
+}
+
+.layout-nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+
+    width: 100vw;
+    height: 50px;
+}
+
+.layout-nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+
+    transition: 0.1s;
+}
+
+.layout-nav-item:hover {
+    background-color: #48525B;
+    color: white;
+}

@@ -29,11 +29,11 @@
 
 
     {% if session['user'] %}
-
-        <nav class="mb-3 layout-header d-flex flex-wrap justify-content-around p-4 bg-dark text-white">
-            <div><a class="nav-link px-2 text-white fs-4" href="/main">Search</a></div>
-            <div><a class="nav-link px-2 text-white fs-4" href="/cart">Cart</a></div>
-            <div><a class="nav-link px-2 text-white fs-4" href="/logout">Logout</a></div>
+    
+        <nav class="layout-nav-bar bg-lighter">
+            <a class="bg-selected layout-nav-item" href="/main">Search</a>
+            <a class="layout-nav-item" href="/cart">Cart</a>
+            <a class="layout-nav-item" href="/logout">Logout</a>
         </nav>
 
     {% endif %}
