@@ -29,11 +29,10 @@
 
 
     {% if session['user'] %}
-    
         <nav class="layout-nav-bar bg-lighter">
-            <a class="bg-selected layout-nav-item" href="/main">Search</a>
-            <a class="layout-nav-item" href="/cart">Cart</a>
-            <a class="layout-nav-item" href="/logout">Logout</a>
+            <a id="search-anchor" class="{% if url_for(request.endpoint) == '/main' %} {{ 'bg-selected' }} {% endif %} layout-nav-item" href="/main">Search</a>
+            <a id="cart-anchor" class="{% if url_for(request.endpoint) == '/cart' %} {{ 'bg-selected' }} {% endif %} layout-nav-item" href="/cart">Cart</a>
+            <a id="logout-anchor" class="layout-nav-item" href="/logout">Logout</a>
         </nav>
 
     {% endif %}
