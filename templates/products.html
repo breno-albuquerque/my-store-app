@@ -19,6 +19,7 @@
             <div id="{{ product['id'] }}" class="product-card" action="/products" method="post">
                 <img class="product-image" src="{{ product['thumbnail'] }}" />
                 <h3 class="product-title"> {{ product['title'] }}</h3>
+                <p class="product-price"> R$ {{ product['price'] }} </p>
                 <button class="product-btn" id="add-btn" type="button">Add</button>
             </div>
         {% endfor %}

@@ -21,10 +21,11 @@
             <div id="{{ item[0]['body']['id'] }}">
                 <img src="{{ item[0]['body']['thumbnail'] }}" />
                 <h3> {{ item[0]['body']['title'] }}</h3>
+                <p class="product-price">{{ item[0]['body']['price'] }}</p>
                 <button class="remove-btn">Remove</button>
             </div>
         {% endfor %}
-        
+        <p id="total-price"> Total: </p>
     </section>
 
 {% endblock %}

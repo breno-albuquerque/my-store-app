@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS Users (
 
 CREATE TABLE IF NOT EXISTS Products_User (
     product_id INTEGER NOT NULL,
-    product_price FLOAT NOT NULL,
     user_id INTEGER NOT NULL,
     FOREIGN KEY(user_id) REFERENCES Users(id)
 );
