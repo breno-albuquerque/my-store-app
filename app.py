@@ -64,9 +64,14 @@ def cart():
 def deleteCart():
     productId = request.args['id']
 
-    db.execute(
-        'DELETE FROM Products_User WHERE user_id = ? AND product_id = ? LIMIT 1', session['user'], productId
-    )
+    if productId == 'all':
+        db.execute(
+            'DELETE FROM Products_User WHERE user_id = ?', session['user']
+        )
+    else:
+        db.execute(
+            'DELETE FROM Products_User WHERE user_id = ? AND product_id = ? LIMIT 1', session['user'], productId
+        )
 
     return Response(status=200)
     

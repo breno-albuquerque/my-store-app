@@ -14,9 +14,8 @@
         <span> Removed from cart! </span>
     </div>
 
+    <h2 style="font-size: 50px;">Cart</h2>
     <section id="cart-section">
-        <h2 style="font-size: 50px;">Cart</h2>
-
         {% for item in cart %}
             <div id="{{ item[0]['body']['id'] }}">
                 <img src="{{ item[0]['body']['thumbnail'] }}" />
@@ -25,7 +24,8 @@
                 <button class="remove-btn">Remove</button>
             </div>
         {% endfor %}
-        <p id="total-price"> Total: </p>
     </section>
+    <p id="total-price"> Total: </p>
+    <button class="remove-btn">Buy</button>
 
 {% endblock %}

@@ -5,32 +5,40 @@ let productsPrices = Array.from(document.getElementsByClassName('product-price')
 const totalPrice = document.getElementById('total-price');
 
 const handleRemove = async ({ target }) => {
-    const cartItem = target.parentElement;
-    cartSection.removeChild(cartItem);
+    let cartItem;
+    let URL;
 
-    productsPrices = Array.from(document.getElementsByClassName('product-price'));
-    const total = productsPrices.reduce((acc, curr) => {
-        console.log(curr)
-         return parseFloat(curr.innerText) + acc
-     }, 0);
-     totalPrice.innerText = `Total: ${total.toFixed(2)}`;
+    if (target.innerText === 'Buy') {
+        URL = `http://localhost:5000/deleteCart?id=all`
+        cartSection.innerHTML = '';
+    } else {
+        cartItem = target.parentElement;
+        URL = `http://localhost:5000/deleteCart?id=${cartItem.id}`;
+        cartSection.removeChild(cartItem); 
+        flashProduct.style.display = "block";
 
-    flashProduct.style.display = "block";
-    setTimeout(() => {
-       flashProduct.style.display = "none";
-    }, 1500);
+        setTimeout(() => {
+           flashProduct.style.display = "none";
+        }, 1500);
+    }
 
-    await fetch(`http://localhost:5000/deleteCart?id=${cartItem.id}`, {
+    handlePrice()
+
+    await fetch(URL, {
         method: "DELETE",
     });
+}
+
+function handlePrice() {
+    productsPrices = Array.from(document.getElementsByClassName('product-price'));
+    const total = productsPrices.reduce((acc, curr) => {
+        return parseFloat(curr.innerText) + acc
+    }, 0);
+    totalPrice.innerText = `Total: ${total.toFixed(2)}`;
 }
 
 removeBtns.forEach(btn => btn.addEventListener('click', handleRemove));
 
 window.onload = () => {
-    const total = productsPrices.reduce((acc, curr) => {
-        return parseFloat(curr.innerText) + acc
-    }, 0);
-
-    totalPrice.innerText = `Total: ${total.toFixed(2)}`;
+    handlePrice()
 }
