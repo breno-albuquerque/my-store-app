@@ -14,7 +14,7 @@ const handleRemove = async ({ target }) => {
     if (target.innerText === 'Buy') {
         URL = `http://localhost:5000/deleteCart?id=all`
         cartSection.innerHTML = '';
-        flashProduct.innerHTML = '<span>Your order has been fulfilled</span>'
+        flashProduct.innerHTML = '<span>Your order has been fulfilled!</span>'
         flashProduct.style.display = "block";
     } else {
         cartItem = target.parentElement;

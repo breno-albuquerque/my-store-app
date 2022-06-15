@@ -2,7 +2,6 @@ const addBtns = Array.from(document.getElementsByClassName('product-btn'));
 const productForm = document.getElementById('product-form');
 const flashProduct = document.getElementById('flash-product');
 
-
 const handleAddBtnClick = async (event) => {
     const productId = event.target.parentElement.id;
 
@@ -22,8 +21,6 @@ const handleAddBtnClick = async (event) => {
             'productId': productId,
         })
     });
-
-
 }
 
 addBtns.forEach(btn => btn.addEventListener('click', handleAddBtnClick));

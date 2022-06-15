@@ -1,7 +1,7 @@
 import os
 import requests
 
-from flask import session
+from flask import session, render_template
 from cs50 import SQL
 
 db = SQL('sqlite:///test.db')
@@ -35,6 +35,10 @@ def getProductById(id):
     except Exception as e:
         print(e)
         return None
+
+def Error(code, message):
+    return render_template('error.html', code=code, message=message)
+
 
 def getCart():
     return db.execute(

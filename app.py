@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, session, Response, flash
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import getProducts, getProductById, getCart
+from helpers import getProducts, getProductById, getCart, Error
 from cs50 import SQL
 
 app = Flask(__name__)
@@ -87,14 +87,14 @@ def register():
         verify = request.form.get('verify')
 
         if not username or not password or not verify:
-            return print('Every input must be provided')
+            return Error(400, 'You must provide username, password and password verification')
         if password != verify:
-            return print('The password verification is not valid')
+            return Error(401, 'The password verification is not valid')
 
         rows = db.execute('SELECT * FROM Users WHERE username = ?', username)
 
         if len(rows) != 0:
-            return print('This username is not available')
+            return Error(409, 'This username is not available')
 
         hash = generate_password_hash(password)
         
@@ -118,14 +118,17 @@ def login():
         password = request.form.get('password')
 
         if not username or not password:
-            return print('Every input must be provided')
+            return Error(400, 'You must provide username and password')
 
         user = db.execute(
             'SELECT * FROM Users WHERE username = ?', username
         )
 
+        if len(user) == 0:
+            return Error(401, 'Wrong credentials')
+
         if not check_password_hash(user[0]['password'], password):
-            return print('Senha incorreta')
+            return Error(401, 'Wrong credentials')
 
         session['user'] = user[0]['id']
 
