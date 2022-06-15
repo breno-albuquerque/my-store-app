@@ -6,24 +6,29 @@
 
 {% block head %}
     <script src="../static/js/cart.js" defer></script>
+    <link href="/static/css/products.css" rel="stylesheet">
+    <link href="/static/css/cart.css" rel="stylesheet">
 {% endblock %}
 
 {% block main %}
 
     <div id="flash-product" style="display: none; transition: all 0.5s;" class="alert alert-primary alert-dismissible fade show" role="alert"></div>
 
-    <h2 style="font-size: 50px;">Cart</h2>
+    <div id="cart-header" >
+        <span id="currency" class="text-dark fs-5">Total:</span><p id="total-price" class="fs-3"></p>
+        <button class="remove-btn btn btn-primary btn-block">Buy</button>
+    </div>
+
     <section id="cart-section">
         {% for item in cart %}
-            <div id="{{ item[0]['body']['id'] }}">
-                <img src="{{ item[0]['body']['thumbnail'] }}" />
-                <h3> {{ item[0]['body']['title'] }}</h3>
-                <p class="product-price">{{ item[0]['body']['price'] }}</p>
-                <button class="remove-btn">Remove</button>
+            <div class="product-card" id="product-section" id="{{ item[0]['body']['id'] }}">
+                <img class="product-image" src="{{ item[0]['body']['thumbnail'].replace('I.jpg', 'W-webp') }}" />
+                <h3 class="product-title fs-6"> {{ item[0]['body']['title'] }}</h3>
+                <p class="product-price fs-5">{{ item[0]['body']['price'] }}</p>
+                <button class="product-btn btn-dark remove-btn">Remove</button>
             </div>
         {% endfor %}
     </section>
-    <p id="total-price"> Total: </p>
-    <button class="remove-btn">Buy</button>
+
 
 {% endblock %}

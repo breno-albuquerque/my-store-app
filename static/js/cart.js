@@ -40,7 +40,7 @@ function handlePrice() {
     const total = productsPrices.reduce((acc, curr) => {
         return parseFloat(curr.innerText) + acc
     }, 0);
-    totalPrice.innerText = `Total: ${total.toFixed(2)}`;
+    totalPrice.innerText = `${total.toFixed(2)}`;
 }
 
 removeBtns.forEach(btn => btn.addEventListener('click', handleRemove));
