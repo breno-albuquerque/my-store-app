@@ -11,8 +11,11 @@ db = SQL('sqlite:///test.db')
 # Session Secret:
 app.secret_key = "secret"
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/', methods=["GET"])
 def index():
+    if 'user in session':
+        return redirect('/main')
+
     return render_template('home.html')
 
 @app.route('/main', methods=["GET", "POST"])
@@ -63,7 +66,7 @@ def cart():
 @app.route('/deleteCart', methods=["DELETE"])
 def deleteCart():
     productId = request.args['id']
-
+    
     if productId == 'all':
         db.execute(
             'DELETE FROM Products_User WHERE user_id = ?', session['user']
