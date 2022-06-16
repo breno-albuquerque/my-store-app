@@ -6,13 +6,19 @@
 
 {% block main %}
 
-    <header>
-        <a href="/">Home</a>
-    </header>
+    <div class="layout-header border-dark navbar d-flex flex-wrap px-5 justify-content-between p-2 bg-dark text-white">
+        <a class="m-1 btn btn-warning text-dark fw-bold" href="/">Back Home</a>
 
-    <section>
-        <p>Error code: {{ code }}</p>
-        <p>Message: {{ message }}</p>
-    </section>
+        <div class="d-flex flex-column justify-content-between">
+            <div class="m-1">
+                <span class="yellow fw-bold">Error code: </span>
+                <span class="fs-6 fw-bold">{{ code }}</span>
+            </div>
+            <div class="m-1">
+                <span class="yellow fw-bold">Message:</span>
+                <span class="fs-6 fw-bold">{{ message }}</span>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
