@@ -4,8 +4,12 @@
     Register
 {% endblock %}
 
+{% block head %}
+    <link href="/static/css/registerLogin.css" rel="stylesheet">
+{% endblock %}
+
 {% block main %}
-    <form class="d-flex flex-column container mt-lg-5" action="/register" method="post">
+    <form class="d-flex flex-column align-items-center container mt-5" action="/register" method="post">
         <div class="mb-3">
             <input class="form-control mx-auto w-auto" autocomplete="off" id="username" name="username" placeholder="Username" type="text">
         </div>
@@ -16,6 +20,8 @@
             <input class="form-control mx-auto w-auto" autocomplete="off" id="verify" name="verify" placeholder="Verify" type="text">
         </div>
 
-        <button class="btn btn-primary mx-auto w-auto" type="submit">Register</button>
+        <div class="w-25 d-flex justify-content-center">
+            <button class="log-btn btn btn-warning block w-75" type="submit">Register</button>
+         </div>
     </form>
 {% endblock %}
