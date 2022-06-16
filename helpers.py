@@ -4,7 +4,7 @@ import requests
 from flask import session, render_template
 from cs50 import SQL
 
-db = SQL('sqlite:///test.db')
+db = SQL('sqlite:///store.db')
 
 def getProducts(category):
     products = []

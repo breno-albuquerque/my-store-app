@@ -6,7 +6,7 @@ from cs50 import SQL
 app = Flask(__name__)
 
 # Connect DB:
-db = SQL('sqlite:///test.db')
+db = SQL('sqlite:///store.db')
 
 # Session Secret:
 app.secret_key = "secret"
