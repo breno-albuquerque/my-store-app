@@ -15,18 +15,18 @@ const handleRemove = async ({ target }) => {
         URL = `http://localhost:5000/deleteCart?id=all`
         cartSection.innerHTML = '';
         flashProduct.innerHTML = '<span>Your order has been fulfilled!</span>'
-        flashProduct.style.display = "block";
+        alertStyle(flashProduct);
     } else {
         cartItem = target.parentElement;
         URL = `http://localhost:5000/deleteCart?id=${cartItem.id}`;
         cartSection.removeChild(cartItem);
         flashProduct.innerHTML = '<span>Product Removed!</span>'
-        flashProduct.style.display = "block";
+        alertStyle(flashProduct);
     }
     
     setTimeout(() => {
         flashProduct.style.display = "none";
-    }, 1500);
+    }, 1000);
 
     handlePrice()
 
@@ -43,6 +43,13 @@ function handlePrice() {
     totalPrice.innerText = `${total.toFixed(2)}`;
 }
 
+function alertStyle(flash) {
+    flash.style.display = 'block';
+    flash.style.width = '200px';
+    flash.style.top = '10px';
+    flash.style.left = 'calc(50% - 100px)';
+}
+
 removeBtns.forEach(btn => btn.addEventListener('click', handleRemove));
 
 window.onload = () => {
@@ -52,5 +59,5 @@ window.onload = () => {
 
     setTimeout(() => {
         flashMsg.style.display = 'none';
-    }, 1500);
+    }, 3000);
 }

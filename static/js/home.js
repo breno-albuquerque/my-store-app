@@ -5,5 +5,5 @@ window.onload = () => {
 
     setTimeout(() => {
         flashMsg.style.display = 'none';
-    }, 1500);
+    }, 3000);
 }

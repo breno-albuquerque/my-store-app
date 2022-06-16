@@ -102,6 +102,7 @@ def register():
             'INSERT INTO Users (username, password) VALUES (?, ?)', username, hash
             )
 
+        flash('You have been registered!')
         return redirect('/')
 
     else:

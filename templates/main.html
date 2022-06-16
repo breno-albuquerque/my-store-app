@@ -14,7 +14,7 @@
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for msg in messages %}
-            <div id="flash-main" class="alert alert-primary alert-dismissible fade show" role="alert">
+            <div id="flash-main" class="alert alert-warning position-absolute top-0 start-50 translate-middle-x text-center mt-2 bi bi-caret-down-fill" role="alert">
                 <span> {{ msg }} </span>
             </div>
         {% endfor %}

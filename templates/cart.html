@@ -12,16 +12,16 @@
 
 {% block main %}
 
-    <div id="flash-product" style="display: none; transition: all 0.5s;" class="alert alert-primary alert-dismissible fade show" role="alert"></div>
+    <div id="flash-product" style="display: none" class="alert alert-warning position-absolute top text-center" role="alert"></div>
 
     <div id="cart-header" >
-        <span id="currency" class="text-dark fs-5">Total:</span><p id="total-price" class="fs-3"></p>
-        <button class="remove-btn btn btn-primary btn-block">Buy</button>
+        <span id="currency" class="text-dark fs-5 fw-bold">Total:</span><p id="total-price" class="fs-3"></p>
+        <button class="remove-btn btn btn-warning">Buy</button>
     </div>
 
     <section id="cart-section">
         {% for item in cart %}
-            <div class="product-card" id="product-section" id="{{ item[0]['body']['id'] }}">
+            <div class="product-card" id="{{ item[0]['body']['id'] }}">
                 <img class="product-image" src="{{ item[0]['body']['thumbnail'].replace('I.jpg', 'W-webp') }}" />
                 <h3 class="product-title fs-6"> {{ item[0]['body']['title'] }}</h3>
                 <p class="product-price fs-5">{{ item[0]['body']['price'] }}</p>
