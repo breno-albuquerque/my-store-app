@@ -1,25 +1,30 @@
 # my-store-app
 
-# What is my-store-app:
+https://www.youtube.com/watch?v=v8nYbiUw7RA
+
+## What is my-store-app:
 
 It's a virtual store where you can: 
 - Create your account, log in, search for certain type of tech products, add and remove products from your cart and "Buy" the products you selected.
 
-# Requirements and dependences:
+## Requirements and dependences:
 
 - python3
 - sqlite3
-- flask
+- pip3 and libraries of requirements.txt
 
-## Docker container:
+### Docker container:
 
 The project also comes with a dockerfile and a docker-compose. To create the container you need to:
 - Have docker installed.
-- Go to the project director and run docker-compose -d
-- Then run docker exec -it <container_id> bash
-- Inside the container all need to do is run python3 app.py
+- Go to the project director and run:
+- <code>docker-compose up -d</code>
+- Then run:
+- <code>docker exec -it <container_id> bash</code>
+- Inside the container all need to do is run: 
+- <code>python3 app.py</code>
 
-#### Explaining the files:
+#### Explaining the files and folders:
 
 - The static folder comes with the css and the javascript files to give the project a nice style and more user interactions with the page.
 - The templates folder comes with all the html pages of the project.
