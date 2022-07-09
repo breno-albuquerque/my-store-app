@@ -1,37 +1,54 @@
-# my-store-app
+# Tech Store
 
-https://www.youtube.com/watch?v=v8nYbiUw7RA
+It's a tech store shopping cart! 
 
-## What is my-store-app:
+## Links:
 
-It's a virtual store where you can: 
-- Create your account, log in, search for certain type of tech products, add and remove products from your cart and "Buy" the products you selected.
+* Demo: https://www.youtube.com/watch?v=v8nYbiUw7RA
 
-## Requirements and dependences:
+## Features:
 
-- python3
-- sqlite3
-- pip3 and libraries of requirements.txt
+##### Register/Login/Logout:
+  - Register an account with valid credentials.
+  - Once registered, it is possible to log in and out.
 
-### Docker container:
+##### Search products by category:
+  - Choose between multiple categories
+  - Real tech products will be displayed
 
-The project also comes with a dockerfile and a docker-compose. To create the container you need to:
-- Have docker installed.
-- Go to the project director and run:
-- <code>docker-compose up -d</code>
-- Then run:
-- <code>docker exec -it <container_id> bash</code>
-- Inside the container all need to do is run: 
-- <code>python3 app.py</code>
+##### Add/Remove from cart:
+  - Add the chosen products to the shopping cart
+  - Remove any chosen products from the cart
+  - The total value will be displayed
+  - "Finish" the order
 
-#### Explaining the files and folders:
+## Main tech stack:
 
-- The static folder comes with the css and the javascript files to give the project a nice style and more user interactions with the page.
-- The templates folder comes with all the html pages of the project.
-- The layout.html file is the main template wich all the others extens from, it also has the connection with bootstrap library.
-- app.py is where the back-end of the application is located, with all the routes and the connection to the database.
-- helpers.py is another python files with some functions that complements the app.py file and make the connection with an external api.
-- store.db is the database with all the tables the project needs to work
-- tables.sqlite is just where the code to create the tables are located, in case you need it.
-- The requeriments.txt comes with a list of what libraries the flask project depends on
+  * Python
+  * Flask
+  * sqlite
+  
+## Running it localy:
 
+#### Requirements:
+
+  - python3
+  - sqlite3
+  - pip3 and libraries of requirements.txt
+
+##### Clone Repository and run app:
+
+```
+$ git clone git@github.com:breno-albuquerque/tech-store.git
+$ cd tech-store
+$ python3 app.py
+```
+#### Or clone and run with docker
+
+```
+$ git clone git@github.com:breno-albuquerque/tech-store.git
+$ cd tech-store
+$ docker-compose up -d
+$ docker exec -it flask_app bash
+$ python3 app.py
+```
